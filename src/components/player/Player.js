@@ -9,6 +9,8 @@
 // Imports
 // --------------------------------------
     import React from 'react';
+    import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+    import {faPlay, faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons"
 
 // --------------------------------------
 // Create Component
@@ -24,6 +26,9 @@
                 </div>
 
                 <div className="playControl">
+                    <FontAwesomeIcon  className = "back"  size="2x" icon = {faAngleLeft} />
+                    <FontAwesomeIcon  className = "play"  size="2x" icon = {faPlay} />
+                    <FontAwesomeIcon  className = "forward"  size="2x" icon = {faAngleRight} />
                 </div>
 
             </div>
