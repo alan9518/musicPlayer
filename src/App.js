@@ -8,6 +8,7 @@
 // Imports
 // --------------------------------------
   import {Player, Song } from './components';
+  import data from "./util";
   import "./styles/app.scss";
   // import './app.scss';
 
