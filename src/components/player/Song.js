@@ -1,29 +1,32 @@
 /* ==========================================================================
-** Music Player Main Component
+** Song Component
 ** 29/12/2020
 ** Alan Medina Silva
 ** ========================================================================== */
 
+
 // --------------------------------------
 // Imports
 // --------------------------------------
-  import {Player, Song } from './components'
-  // import './app.scss';
+    import React from 'react';
 
 // --------------------------------------
 // Create Component
 // --------------------------------------
-  function App() {
-    return (
-      <div className="App">
-        <h1>Music Player </h1>
-        <Song/>
-        <Player/>
-      </div>
-    );
-  }
+    const Song = () => {
+
+        return(
+            <div className="songContainer">
+                <p> Song Name</p>
+                <p> Song Artist</p>
+                <p> Song Album</p>
+
+             </div>
+        )
+
+    }
 
 // --------------------------------------
 // Export Component
 // --------------------------------------
-  export default App;
+    export default Song;
