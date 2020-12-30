@@ -13,14 +13,15 @@
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const Song = () => {
+    const Song = ({currentSong}) => {
+
+        const {cover, name, artist, album} = currentSong;
 
         return(
             <div className="songContainer">
-                <p> Song Name</p>
-                <p> Song Artist</p>
-                <p> Song Album</p>
-
+               <img src={cover} alt={name}/>
+                <h2> {name} </h2>
+                <h4> {artist}</h4>
              </div>
         )
 

@@ -7,20 +7,31 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
+  import { useState } from 'react';  
   import {Player, Song } from './components';
   import data from "./util";
   import "./styles/app.scss";
+  
   // import './app.scss';
 
 // --------------------------------------
 // Create Component
 // --------------------------------------
   function App() {
+
+
+    // ?--------------------------------------
+    // ? Add State
+    // ?--------------------------------------
+    const [songs, setSongs] = useState(data());
+    const [currentSong, setCurrentSong] = useState(songs[0]);
+    const [isPlaying, setIsPlaying] = useState(false)
+    // console.log("🚀 ~ file: App.js ~ line 28 ~ App ~ currentSong", currentSong);
+
     return (
       <div className="App">
-        <h1>Music Player </h1>
-        <Song/>
-        <Player/>
+        <Song currentSong = {currentSong}/>
+        <Player currentSong = {currentSong} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying}/>
       </div>
     );
   }

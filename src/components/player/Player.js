@@ -8,28 +8,70 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
-    import React from 'react';
+    import React, {useRef, useState} from 'react';
     import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-    import {faPlay, faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons"
+    import {faPlay, faAngleLeft, faAngleRight, faPause} from "@fortawesome/free-solid-svg-icons"
 
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const Player = () => {
+    const Player = ({currentSong, isPlaying, setIsPlaying}) => {
 
+        const {audio} = currentSong;
+        const audioRef = useRef(null);
+
+        // ?--------------------------------------
+        // ? Handle State
+        // ?--------------------------------------
+
+            const [songInfo, setSongInfo] = useState({
+                currentTime : null,
+                duration: null
+            });
+            
+        
+        // ?--------------------------------------
+        // ? Event Handlers
+        // ?--------------------------------------
+            const playSongHandler = (event) => {
+                isPlaying === false ?audioRef.current.play() : audioRef.current.pause();
+                setIsPlaying(!isPlaying);
+            }
+
+            //? Update song Timers
+            const timeUpdateHandler = (event) => {
+                const currentTime = event.target.currentTime;
+                const duration = event.target.duration;
+                setSongInfo({...songInfo, currentTime, duration})
+            }
+
+        
+            //? Format Song Timers
+            const formatTime = (time) => {
+                return `${Math.floor(time/60)} : 0 ${Math.floor(time % 60)}`
+            }
+
+
+
+
+        // ?--------------------------------------
+        // ? Render Component
+        // ?--------------------------------------
         return(
             <div className="playerContainer"> 
                 <div className="timeControl">
-                    <p>Start Time</p>
+                    <p>{formatTime(songInfo.currentTime)}</p>
                     <input type="range" name="range" id="range"/>
-                    <p>End Time</p>
+                    <p>{formatTime(songInfo.duration)}</p>
                 </div>
 
                 <div className="playControl">
                     <FontAwesomeIcon  className = "back"  size="2x" icon = {faAngleLeft} />
-                    <FontAwesomeIcon  className = "play"  size="2x" icon = {faPlay} />
+                    <FontAwesomeIcon  onClick = {playSongHandler} className = "play"  size="2x" icon = {isPlaying === false ? faPlay : faPause} />
                     <FontAwesomeIcon  className = "forward"  size="2x" icon = {faAngleRight} />
                 </div>
+
+                 <audio ref= {audioRef} src = {audio} onTimeUpdate = {timeUpdateHandler} onLoadedMetadata = {timeUpdateHandler} ></audio>
 
             </div>
         )
