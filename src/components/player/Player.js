@@ -72,7 +72,7 @@
 
                 <div className="playControl">
                     <FontAwesomeIcon  className = "back"  size="2x" icon = {faAngleLeft} />
-                    <FontAwesomeIcon  onClick = {playSongHandler} className = "play"  size="2x" icon = {isPlaying === false ? faPlay : faPause} />
+                    <FontAwesomeIcon  onClick = {playSongHandler} className = "play"  size="2x" icon = {isPlaying ? faPause : faPlay } />
                     <FontAwesomeIcon  className = "forward"  size="2x" icon = {faAngleRight} />
                 </div>
 

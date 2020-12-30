@@ -8,7 +8,7 @@
 // Imports
 // --------------------------------------
   import { useState } from 'react';  
-  import {Player, Song } from './components';
+  import {Player, Song, Library } from './components';
   import data from "./util";
   import "./styles/app.scss";
   
@@ -32,6 +32,7 @@
       <div className="App">
         <Song currentSong = {currentSong}/>
         <Player currentSong = {currentSong} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying}/>
+        <Library library =  {songs} setCurrentSong = {setCurrentSong}/>
       </div>
     );
   }

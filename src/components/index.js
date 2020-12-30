@@ -9,6 +9,7 @@
 // --------------------------------------
     import Player from './player/Player';
     import Song from './player/Song';
+    import Library from './songsLibrary/Library'
 
 
 
@@ -18,5 +19,6 @@
 // --------------------------------------
     export {
         Player,
-        Song
+        Song,
+        Library
     }
