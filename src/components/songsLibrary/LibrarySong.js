@@ -8,19 +8,25 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
-    import React from 'react';
+    import React, {useEffect} from 'react';
 
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const LibrarySong = ({song, setCurrentSong}) => {
+    const LibrarySong = ({song, setCurrentSong, activeSong}) => {
+        
 
-        const {cover, name, artist, id} = song;
+        const {cover, name, artist, id, active} = song;
+        
+        const activeClass = activeSong? 'selected' : '';
+        // className={`librarySong ${active ? 'selected' : ''}`}
 
+
+        
        
         //? setCurrentSong(songId) comes from parent Component
         return(
-            <div className="librarySong" onClick = {() => setCurrentSong(id)} id= {id}>
+            <div className={`librarySong ${activeClass}`} onClick = {() => setCurrentSong(id)} onDoubleClick={() => setCurrentSong(id)} id= {id}>
                <img src={cover && cover} alt={name && name}/>
                 <div className="songDescription">
                     <h3> {name && name} </h3>

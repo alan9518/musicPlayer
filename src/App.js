@@ -7,10 +7,11 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
-  import { useState } from 'react';  
-  import {Player, Song, Library } from './components';
+  import { useState, useRef } from 'react';  
+  import {Player, Song, Library, Nav } from './components';
   import data from "./util";
   import "./styles/app.scss";
+import { library } from '@fortawesome/fontawesome-svg-core';
   
   // import './app.scss';
 
@@ -25,14 +26,16 @@
     // ?--------------------------------------
     const [songs, setSongs] = useState(data());
     const [currentSong, setCurrentSong] = useState(songs[0]);
-    const [isPlaying, setIsPlaying] = useState(false)
-    // console.log("🚀 ~ file: App.js ~ line 28 ~ App ~ currentSong", currentSong);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const audioRef = useRef(null);
+    const [libraryStatus, setLibraryStatus] = useState(false);
 
     return (
       <div className="App">
-        <Song currentSong = {currentSong}/>
-        <Player currentSong = {currentSong} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying}/>
-        <Library library =  {songs} setCurrentSong = {setCurrentSong}/>
+        <Nav libraryStatus = {libraryStatus} setLibraryStatus = {setLibraryStatus}/>
+        <Song currentSong = {currentSong} />
+        <Player currentSong = {currentSong} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying} audioRef = {audioRef}/>
+        <Library library =  {songs} setCurrentSong = {setCurrentSong} audioRef = {audioRef} activeSong = {currentSong.id} libraryStatus = {libraryStatus} />
       </div>
     );
   }
