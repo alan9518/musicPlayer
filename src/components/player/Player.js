@@ -41,7 +41,7 @@
                 // return () => {
                 //     console.log("🚀 ~ file: Player.js ~ line 38 ~ return ~ cleanup");
                 // }
-                    
+                // eslint-disable-next-line react-hooks/exhaustive-deps
             }, [isPlaying, currentSong, audioRef])
             
         
