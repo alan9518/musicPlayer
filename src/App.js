@@ -11,7 +11,7 @@
   import {Player, Song, Library, Nav } from './components';
   import data from "./util";
   import "./styles/app.scss";
-import { library } from '@fortawesome/fontawesome-svg-core';
+
   
   // import './app.scss';
 
@@ -31,7 +31,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
     const [libraryStatus, setLibraryStatus] = useState(false);
 
     return (
-      <div className="App">
+      <div className={`App ${libraryStatus ? 'library-active' : ''}`}>
         <Nav libraryStatus = {libraryStatus} setLibraryStatus = {setLibraryStatus}/>
         <Song currentSong = {currentSong} />
         <Player currentSong = {currentSong} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying} audioRef = {audioRef} songs={songs} setCurrentSong = {setCurrentSong} />

@@ -8,10 +8,9 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
-    import React, {useRef, useState, useEffect} from 'react';
-    import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+    import React from 'react';
     import LibrarySong from "./LibrarySong"
-    import {faPlay, faAngleLeft, faAngleRight, faPause} from "@fortawesome/free-solid-svg-icons"
+    
 
 // --------------------------------------
 // Create Component

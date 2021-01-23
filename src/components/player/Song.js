@@ -15,7 +15,7 @@
 // --------------------------------------
     const Song = ({currentSong}) => {
 
-        const {cover, name, artist, album} = currentSong;
+        const {cover, name, artist} = currentSong;
 
         return(
             <div className="songContainer">
