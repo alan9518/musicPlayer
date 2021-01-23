@@ -34,7 +34,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
       <div className="App">
         <Nav libraryStatus = {libraryStatus} setLibraryStatus = {setLibraryStatus}/>
         <Song currentSong = {currentSong} />
-        <Player currentSong = {currentSong} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying} audioRef = {audioRef}/>
+        <Player currentSong = {currentSong} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying} audioRef = {audioRef} songs={songs} setCurrentSong = {setCurrentSong} />
         <Library library =  {songs} setCurrentSong = {setCurrentSong} audioRef = {audioRef} activeSong = {currentSong.id} libraryStatus = {libraryStatus} />
       </div>
     );

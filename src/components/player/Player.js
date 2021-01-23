@@ -15,7 +15,7 @@
 // --------------------------------------
 // Create Component
 // --------------------------------------
-    const Player = ({currentSong, isPlaying, setIsPlaying, audioRef}) => {
+    const Player = ({currentSong, isPlaying, setIsPlaying, audioRef, songs, setCurrentSong}) => {
 
         const {audio} = currentSong;
         
@@ -30,13 +30,15 @@
             });
 
             useEffect(() => {
-                console.log("🚀 ~ file: Player.js ~ line 34 ~ useEffect ~ isPlaying", isPlaying);
+                
                 if(isPlaying && audioRef.current.paused) {
                     
-                    setIsPlaying(!isPlaying); 
-                    audioRef.current.play();
                     
-                }else 
+                    audioRef.current.play();
+                    setIsPlaying(!isPlaying); 
+                    
+                }else if(!audioRef.current.paused)
+                    setIsPlaying(true) 
                     
                 return () => {
                     console.log("🚀 ~ file: Player.js ~ line 38 ~ return ~ cleanup");
@@ -73,6 +75,14 @@
                 setSongInfo({...songInfo, currentTime : event.target.value})
             }
 
+            const skipTrackHandler = (direction) => {
+                const currentIndex = songs.findIndex((song) => song.id === currentSong.id )
+                
+                if(direction === 'skip-backward')
+                    currentIndex === 0? setCurrentSong(songs[songs.length-1]) : setCurrentSong(songs[currentIndex-1])
+                else
+                    currentIndex === songs.length -1 ? setCurrentSong(songs[0]) : setCurrentSong(songs[currentIndex+1])
+            }
 
 
 
@@ -88,9 +98,9 @@
                 </div>
 
                 <div className="playControl">
-                    <FontAwesomeIcon  className = "back"  size="2x" icon = {faAngleLeft} />
+                    <FontAwesomeIcon  className = "back"  size="2x" icon = {faAngleLeft} onClick =  {()=>skipTrackHandler('skip-backward')}/>
                     <FontAwesomeIcon  onClick = {playSongHandler} className = "play"  size="2x" icon = {isPlaying ? faPause : faPlay } />
-                    <FontAwesomeIcon  className = "forward"  size="2x" icon = {faAngleRight} />
+                    <FontAwesomeIcon  className = "forward"  size="2x" icon = {faAngleRight}  onClick =  {()=>skipTrackHandler('skip-forward')}/>
                 </div>
 
                  <audio ref= {audioRef && audioRef} src = {audio} onTimeUpdate = {timeUpdateHandler} onLoadedMetadata = {timeUpdateHandler} ></audio>
