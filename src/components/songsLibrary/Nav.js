@@ -18,7 +18,7 @@
     const Nav  = ({libraryStatus, setLibraryStatus}) => {
         return (
             <nav>
-                <h1> Waves  </h1>
+                <h1> React Hooks Music Player  </h1>
                 <button onClick = {() => {setLibraryStatus(!libraryStatus)}}>
                     Library
                     <FontAwesomeIcon icon = {faMusic}/>

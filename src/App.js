@@ -24,8 +24,11 @@
     // ?--------------------------------------
     // ? Add State
     // ?--------------------------------------
-    const [songs, setSongs] = useState([]);
-    setSongs(data());
+    
+    
+    // const [songs, setSongs] = useState(data());
+    // setSongs(data());
+    const songs = data();
     const [currentSong, setCurrentSong] = useState(songs[0]);
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef(null);
