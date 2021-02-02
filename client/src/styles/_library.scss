@@ -1,0 +1,111 @@
+/* ==========================================================================
+** Library Styles
+** 30/12/2020
+** Alan Medina Silva
+** ========================================================================== */
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155,155,155,0.5) transparent;
+}
+
+*::-webkit-scrollbar-track {
+    scrollbar-width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+   background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    scrollbar-color: rgba(155,155,155,0.5);
+    border: transparent;
+    border-radius: 20px;
+}
+
+.libraryContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 18rem;
+    height: 100%;
+    background-color:white;
+    box-shadow: 2px 2px 50px rgb(210, 208, 208);
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.2s ease;
+    h2 {
+        padding: 2rem;
+    }
+
+    .librarySongs {
+        position: relative;
+        overflow: scroll;
+        height: 100%;
+    }
+    
+}
+
+.librarySong {
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem 1rem 2rem;
+    cursor: pointer;
+    -webkit-transition: background-color 200ms cubic-bezier(0.15, 0.78, 0.54, 0.73);
+    -moz-transition: background-color 200ms cubic-bezier(0.15, 0.78, 0.54, 0.73);
+    -o-transition: background-color 200ms cubic-bezier(0.15, 0.78, 0.54, 0.73);
+    -ms-transition: background-color 200ms cubic-bezier(0.15, 0.78, 0.54, 0.73);
+    transition: background-color 200ms cubic-bezier(0.15, 0.78, 0.54, 0.73);
+    img {
+        width: 40%;
+    }
+    &:hover{
+        background-color: rgba(222, 222, 255, 1);
+    }
+}
+
+.library-header {
+    position : sticky;
+    display: flex;
+    justify-content: space-between;
+    min-height: 10vh;
+    align-items: center;
+    padding: 1rem 1rem 1rem 1rem;
+
+    /*img {
+        width: 75px;
+        margin-top: 10px;
+        height: 75px;
+    }*/
+
+    .back {
+        cursor: pointer;
+    }
+    
+    h2 {
+        padding: 1.2rem;
+        margin-right: auto;
+    }
+}
+
+
+.songDescription {
+    padding-left: 1rem;
+    h3 {
+        font-size: 1rem;
+    }
+
+    h4 {
+        font-size: 0.7rem;
+    }
+}
+
+
+.selected {
+    background-color: rgb(145,165,218);
+}
+
+.activeLibrary {
+    transform: translateX(0%);
+    opacity: 1;
+}

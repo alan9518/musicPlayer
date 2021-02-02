@@ -1,0 +1,55 @@
+.login-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.text-container {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40vh;
+
+    h2 {
+        font-size: 4.6rem;
+        font-weight: 700;
+    }
+    p {
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        margin-top: 20px;
+    }
+    span {
+        margin-top: auto;
+    }
+}
+
+.login-button {
+    padding: 16px 45px 16px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 50px;
+    color: #1db954;
+    background-color: transparent;
+    border: 1px solid #1db954;
+    // border: none;
+    cursor : pointer;
+    // font-size: 0.9rem;
+    text-decoration: none;
+    margin-top: 30px;
+    transition: 0.3s;
+    -webkit-transition: background-color 400ms ease-in-out;
+    -moz-transition: background-color 400ms ease-in-out;
+    -o-transition: background-color 400ms ease-in-out;
+    -ms-transition: background-color 400ms ease-in-out;
+    transition: background-color 400ms ease-in-out;
+    &:hover{
+        background-color: #1db954;
+        color : #fff;
+  }
+}
+  
