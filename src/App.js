@@ -77,21 +77,14 @@ function App() {
     microsoftTeams.initialize();
 
     authentication
-      .authenticate({
-        url: window.location.origin + "/tab/home",
-        width: 600,
-        height: 535,
+      .getAuthToken({})
+      .then((token) => {
+        console.log("Success: " + token);
+        setToken(token);
       })
-      .then((result) => {
-        console.log("Login succeeded: " + result);
-        let data = localStorage.getItem(result);
-        localStorage.removeItem(result);
-        let tokenResult = JSON.parse(data);
-        setToken(tokenResult.idToken);
-      })
-      .catch((reason) => {
-        console.log("Login failed: " + reason);
-        setToken(reason);
+      .catch((error) => {
+        console.log("Error getting token: " + error);
+        setToken(error);
       });
   };
 
