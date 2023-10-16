@@ -33,7 +33,7 @@ function App() {
   // const isAuthenticated = useIsAuthenticated();
   // console.log("🚀 ~ file: App.js:29 ~ App ~ isAuthenticated:", isAuthenticated);
 
-  useMsalAuthentication(InteractionType.Redirect);
+  useMsalAuthentication(InteractionType.Popup);
   const { inProgress, accounts } = useMsal();
   console.log("🚀 ~ file: App.js:38 ~ App ~ accounts:", accounts);
 
