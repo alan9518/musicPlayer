@@ -14,6 +14,8 @@ import {
 } from "@azure/msal-react";
 
 import * as microsoftTeams from "@microsoft/teams-js";
+import { authentication } from "@microsoft/teams-js";
+
 import { useEffect, useRef, useState } from "react";
 import { Library, Nav, Player, Song } from "./components";
 import "./styles/app.scss";
@@ -73,16 +75,24 @@ function App() {
 
   const loginInTeams = () => {
     microsoftTeams.initialize();
-    microsoftTeams.authentication.getAuthToken({
-      successCallback: (result) => {
-        console.log("result", result);
-        setToken(result);
-      },
-      failureCallback: (reason) => {
-        console.log("reason", reason);
+
+    authentication
+      .authenticate({
+        url: window.location.origin + "/tab/home",
+        width: 600,
+        height: 535,
+      })
+      .then((result) => {
+        console.log("Login succeeded: " + result);
+        let data = localStorage.getItem(result);
+        localStorage.removeItem(result);
+        let tokenResult = JSON.parse(data);
+        setToken(tokenResult.idToken);
+      })
+      .catch((reason) => {
+        console.log("Login failed: " + reason);
         setToken(reason);
-      },
-    });
+      });
   };
 
   return (
