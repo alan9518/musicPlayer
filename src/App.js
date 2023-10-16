@@ -33,7 +33,9 @@ function App() {
   // const isAuthenticated = useIsAuthenticated();
   // console.log("🚀 ~ file: App.js:29 ~ App ~ isAuthenticated:", isAuthenticated);
 
-  useMsalAuthentication(InteractionType.Popup);
+  const { login, result, error } = useMsalAuthentication(
+    InteractionType.Redirect
+  );
   const { inProgress, accounts } = useMsal();
   console.log("🚀 ~ file: App.js:38 ~ App ~ accounts:", accounts);
 
@@ -53,6 +55,9 @@ function App() {
       <UnauthenticatedTemplate>
         Not signed in
         {inProgress && <span> loading </span>}
+        {error && JSON.stringify(error)}
+        {result && JSON.stringify(result)}
+        <button onClick={() => login()}> retry login </button>
       </UnauthenticatedTemplate>
 
       <AuthenticatedTemplate>
