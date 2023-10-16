@@ -80,6 +80,7 @@ function App() {
       },
       failureCallback: (reason) => {
         console.log("reason", reason);
+        setToken(reason);
       },
     });
   };
