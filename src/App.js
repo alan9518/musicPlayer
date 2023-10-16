@@ -7,20 +7,37 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
-import { InteractionType } from "@azure/msal-browser";
 import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
   useMsal,
-  useMsalAuthentication,
 } from "@azure/msal-react";
 
+import * as microsoftTeams from "@microsoft/teams-js";
 import { useEffect, useRef, useState } from "react";
 import { Library, Nav, Player, Song } from "./components";
 import "./styles/app.scss";
 import data from "./util";
 
 // import './app.scss';
+
+const checkInTeams = () => {
+  // eslint-disable-next-line dot-notation
+  const microsoftTeamsLib = microsoftTeams || window["microsoftTeams"];
+
+  if (!microsoftTeamsLib) {
+    return false; // the Microsoft Teams library is for some reason not loaded
+  }
+
+  if (
+    (window.parent === window.self && window.nativeInterface) ||
+    window.name === "embedded-page-container" ||
+    window.name === "extension-tab-frame"
+  ) {
+    return true;
+  }
+  return false;
+};
 
 // --------------------------------------
 // Create Component
@@ -33,32 +50,50 @@ function App() {
   // const isAuthenticated = useIsAuthenticated();
   // console.log("🚀 ~ file: App.js:29 ~ App ~ isAuthenticated:", isAuthenticated);
 
-  const { login, result, error } = useMsalAuthentication(
-    InteractionType.Redirect
-  );
+  // const { login, result, error } = useMsalAuthentication(
+  //   InteractionType.Redirect
+  // );
   const { inProgress, accounts } = useMsal();
   console.log("🚀 ~ file: App.js:38 ~ App ~ accounts:", accounts);
+
+  const isInTeams = checkInTeams();
+  console.log("🚀 ~ file: App.js:60 ~ App ~ isInTeams:", isInTeams);
 
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(data[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const [libraryStatus, setLibraryStatus] = useState(false);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     setSongs(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const loginInTeams = () => {
+    microsoftTeams.initialize();
+    microsoftTeams.authentication.getAuthToken({
+      successCallback: (result) => {
+        console.log("result", result);
+        setToken(result);
+      },
+      failureCallback: (reason) => {
+        console.log("reason", reason);
+      },
+    });
+  };
+
   return (
     <>
       <UnauthenticatedTemplate>
         Not signed in
         {inProgress && <span> loading </span>}
-        {error && JSON.stringify(error)}
-        {result && JSON.stringify(result)}
-        <button onClick={() => login()}> retry login </button>
+        <h5>is in Teams {isInTeams.toString()}</h5>
+        <button onClick={loginInTeams}> retry login </button>
       </UnauthenticatedTemplate>
+
+      {token && <code> {token} </code>}
 
       <AuthenticatedTemplate>
         <div className={`App ${libraryStatus ? "library-active" : ""}`}>
