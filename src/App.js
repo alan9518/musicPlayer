@@ -7,11 +7,7 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
-import {
-  AuthenticatedTemplate,
-  UnauthenticatedTemplate,
-  useMsal,
-} from "@azure/msal-react";
+import { UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
 
 import * as microsoftTeams from "@microsoft/teams-js";
 import { authentication } from "@microsoft/teams-js";
@@ -97,32 +93,30 @@ function App() {
         <button onClick={loginInTeams}> retry login </button>
       </UnauthenticatedTemplate>
 
-      {token && <code> {token} </code>}
+      <code> {token} </code>
 
-      <AuthenticatedTemplate>
-        <div className={`App ${libraryStatus ? "library-active" : ""}`}>
-          <Nav
-            libraryStatus={libraryStatus}
-            setLibraryStatus={setLibraryStatus}
-          />
-          <Song currentSong={currentSong} />
-          <Player
-            currentSong={currentSong}
-            isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
-            audioRef={audioRef}
-            songs={songs}
-            setCurrentSong={setCurrentSong}
-          />
-          <Library
-            library={songs}
-            setCurrentSong={setCurrentSong}
-            audioRef={audioRef}
-            activeSong={currentSong && currentSong.id}
-            libraryStatus={libraryStatus}
-          />
-        </div>
-      </AuthenticatedTemplate>
+      <div className={`App ${libraryStatus ? "library-active" : ""}`}>
+        <Nav
+          libraryStatus={libraryStatus}
+          setLibraryStatus={setLibraryStatus}
+        />
+        <Song currentSong={currentSong} />
+        <Player
+          currentSong={currentSong}
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          audioRef={audioRef}
+          songs={songs}
+          setCurrentSong={setCurrentSong}
+        />
+        <Library
+          library={songs}
+          setCurrentSong={setCurrentSong}
+          audioRef={audioRef}
+          activeSong={currentSong && currentSong.id}
+          libraryStatus={libraryStatus}
+        />
+      </div>
     </>
   );
 }
