@@ -7,7 +7,7 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
-import { UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
+// import { useMsal } from "@azure/msal-react";
 
 // import * as microsoftTeams from "@microsoft/teams-js";
 import * as microsoftTeams from "@microsoft/teams-js";
@@ -51,45 +51,32 @@ function App() {
   // const { login, result, error } = useMsalAuthentication(
   //   InteractionType.Redirect
   // );
-  const { inProgress, accounts } = useMsal();
-  console.log("🚀 ~ file: App.js:38 ~ App ~ accounts:", accounts);
+  // const { inProgress, accounts } = useMsal();
 
   const isInTeams = checkInTeams();
-  console.log("🚀 ~ file: App.js:60 ~ App ~ isInTeams:", isInTeams);
 
   const [songs, setSongs] = useState([]);
   const [currentSong, setCurrentSong] = useState(data[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const [libraryStatus, setLibraryStatus] = useState(false);
-  const [token, setToken] = useState("initial state token");
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    microsoftTeams.initialize();
+    isInTeams && microsoftTeams.initialize();
     setSongs(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isInTeams]);
 
   const loginInTeams = () => {
     try {
-      // microsoftTeams.authentication
-      //   .getAuthToken({})
-      //   .then((token) => {
-      //     console.log("Success: " + token);
-      //     // getToken(token);
-      //     setToken("sucess");
-      //   })
-      //   .catch((error) => {
-      //     console.log("Error getting token: " + error);
-      //     setToken("error" + error);
-      //   });
       // Initialize the Microsoft Teams SDK
       microsoftTeams.initialize();
 
       // Get the user context from Teams and set it in the state
       microsoftTeams.getContext((context, error) => {
         if (error) setToken(JSON.stringify(error));
-        else setToken(JSON.stringify(context));
+        else setToken(JSON.stringify(context, null, 2));
       });
     } catch (error) {
       setToken("error");
@@ -98,14 +85,14 @@ function App() {
 
   return (
     <>
-      <UnauthenticatedTemplate>
-        Not signed in
-        {inProgress && <span> loading </span>}
-        <h5>is in Teams {isInTeams.toString()}</h5>
-        <button onClick={loginInTeams}> retry login </button>
-      </UnauthenticatedTemplate>
+      <h5>is in Teams {isInTeams.toString()}</h5>
+      <button onClick={loginInTeams}> Get User context </button>
 
-      <code> {token} </code>
+      {token !== "" && (
+        <div className="codeblock">
+          <code> {token} </code>
+        </div>
+      )}
 
       <div className={`App ${libraryStatus ? "library-active" : ""}`}>
         <Nav
