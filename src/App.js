@@ -72,17 +72,25 @@ function App() {
 
   const loginInTeams = () => {
     try {
-      microsoftTeams.authentication
-        .getAuthToken({})
-        .then((token) => {
-          console.log("Success: " + token);
-          // getToken(token);
-          setToken("sucess");
-        })
-        .catch((error) => {
-          console.log("Error getting token: " + error);
-          setToken("error" + error);
-        });
+      // microsoftTeams.authentication
+      //   .getAuthToken({})
+      //   .then((token) => {
+      //     console.log("Success: " + token);
+      //     // getToken(token);
+      //     setToken("sucess");
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error getting token: " + error);
+      //     setToken("error" + error);
+      //   });
+      // Initialize the Microsoft Teams SDK
+      microsoftTeams.initialize();
+
+      // Get the user context from Teams and set it in the state
+      microsoftTeams.getContext((context, error) => {
+        if (error) setToken(JSON.stringify(error));
+        else setToken(JSON.stringify(context));
+      });
     } catch (error) {
       setToken("error");
     }

@@ -13,29 +13,22 @@ const msalInstance = new PublicClientApplication({
     authority:
       "https://login.microsoftonline.com/42c709b6-6772-48dd-bde9-c62288883620",
     redirectUri: "/",
+    navigateToLoginRequestUrl: false,
+  },
+  cache: {
+    cacheLocation: BrowserCacheLocation.LocalStorage, // Ensure cache is shared between windows/tabs
   },
 });
 
 msalInstance.initialize().then(() => {
   // Account selection logic is app dependent. Adjust as needed for different use cases.
   const accounts = msalInstance.getAllAccounts();
-  console.log(
-    "🚀 ~ file: main.tsx:22 ~ msalInstance.initialize ~ msalInstance:",
-    msalInstance
-  );
-  console.log(
-    "🚀 ~ file: main.tsx:22 ~ msalInstance.initialize ~ accounts:",
-    accounts
-  );
+
   if (accounts.length > 0) {
     msalInstance.setActiveAccount(accounts[0]);
   }
 
   msalInstance.addEventCallback((event) => {
-    console.log(
-      "🚀 ~ file: main.tsx:28 ~ msalInstance.addEventCallback ~ event:",
-      event
-    );
     if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
       const payload = event.payload;
       const account = payload.account;
