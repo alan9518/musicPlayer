@@ -15,9 +15,9 @@ const msalInstance = new PublicClientApplication({
     redirectUri: "/",
     navigateToLoginRequestUrl: false,
   },
-  cache: {
-    cacheLocation: BrowserCacheLocation.LocalStorage, // Ensure cache is shared between windows/tabs
-  },
+  // cache: {
+  //   cacheLocation: BrowserCacheLocation.LocalStorage, // Ensure cache is shared between windows/tabs
+  // },
 });
 
 msalInstance.initialize().then(() => {
