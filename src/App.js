@@ -62,7 +62,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const [libraryStatus, setLibraryStatus] = useState(false);
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState("initial state token");
 
   useEffect(() => {
     microsoftTeams.initialize();
@@ -72,18 +72,17 @@ function App() {
 
   const loginInTeams = () => {
     try {
-      let authTokenRequest = {
-        sucessCallback: function (result) {
-          alert("sucess" + result);
+      microsoftTeams.authentication
+        .getAuthToken({})
+        .then((token) => {
+          console.log("Success: " + token);
+          // getToken(token);
           setToken("sucess");
-        },
-        errorCallback: function (error) {
-          alert("sucess" + error);
+        })
+        .catch((error) => {
+          console.log("Error getting token: " + error);
           setToken("error");
-        },
-      };
-
-      microsoftTeams.authentication.getAuthToken(authTokenRequest);
+        });
     } catch (error) {
       setToken("error");
     }
