@@ -4,37 +4,47 @@
 ** Alan Medina Silva
 ** ========================================================================== */
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
-
-h1, h2, h3 {
-    color: rgb(54,54,54);
+h1,
+h2,
+h3 {
+  color: rgb(54, 54, 54);
 }
 
-
-h3, h4 {
-    font-weight: 400;
-    color: rgb(100,100,100);
+h3,
+h4 {
+  font-weight: 400;
+  color: rgb(100, 100, 100);
 }
 
 .App {
-    transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .library-active {
-    margin-left: 30%;
+  margin-left: 30%;
 }
-
 
 @import "./song";
 @import "./player";
 @import "./library";
 @import "./nav";
+
+body {
+  background-color: #e3e3e3;
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not([data-theme="light"]) {
+    background-color: red;
+  }
+}
