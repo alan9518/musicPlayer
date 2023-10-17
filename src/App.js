@@ -71,18 +71,22 @@ function App() {
   }, []);
 
   const loginInTeams = () => {
-    let authTokenRequest = {
-      sucessCallback: function (result) {
-        alert("sucess" + result);
-        setToken("sucess");
-      },
-      errorCallback: function (error) {
-        alert("sucess" + error);
-        setToken("error");
-      },
-    };
+    try {
+      let authTokenRequest = {
+        sucessCallback: function (result) {
+          alert("sucess" + result);
+          setToken("sucess");
+        },
+        errorCallback: function (error) {
+          alert("sucess" + error);
+          setToken("error");
+        },
+      };
 
-    microsoftTeams.authentication.getAuthToken(authTokenRequest);
+      microsoftTeams.authentication.getAuthToken(authTokenRequest);
+    } catch (error) {
+      setToken("error");
+    }
   };
 
   return (
