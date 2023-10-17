@@ -81,7 +81,7 @@ function App() {
         })
         .catch((error) => {
           console.log("Error getting token: " + error);
-          setToken("error");
+          setToken("error" + JSON.stringify(error));
         });
     } catch (error) {
       setToken("error");
