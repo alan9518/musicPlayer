@@ -9,8 +9,8 @@
 // --------------------------------------
 import { UnauthenticatedTemplate, useMsal } from "@azure/msal-react";
 
+// import * as microsoftTeams from "@microsoft/teams-js";
 import * as microsoftTeams from "@microsoft/teams-js";
-import { authentication } from "@microsoft/teams-js";
 
 import { useEffect, useRef, useState } from "react";
 import { Library, Nav, Player, Song } from "./components";
@@ -65,23 +65,24 @@ function App() {
   const [token, setToken] = useState("");
 
   useEffect(() => {
+    microsoftTeams.initialize();
     setSongs(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loginInTeams = () => {
-    microsoftTeams.initialize();
+    let authTokenRequest = {
+      sucessCallback: function (result) {
+        alert("sucess" + result);
+        setToken("sucess");
+      },
+      errorCallback: function (error) {
+        alert("sucess" + error);
+        setToken("error");
+      },
+    };
 
-    authentication
-      .getAuthToken({})
-      .then((token) => {
-        console.log("Success: " + token);
-        setToken(token);
-      })
-      .catch((error) => {
-        console.log("Error getting token: " + error);
-        setToken(error);
-      });
+    microsoftTeams.authentication.getAuthToken(authTokenRequest);
   };
 
   return (
