@@ -7,7 +7,7 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
-import { useMsal } from "@azure/msal-react";
+// import { useMsal } from "@azure/msal-react";
 import { faArrowCircleRight, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -15,8 +15,8 @@ import React from "react";
 // --------------------------------------
 // Create Component
 // --------------------------------------
-const Nav = ({ libraryStatus, setLibraryStatus }) => {
-  const { instance } = useMsal();
+const Nav = ({ libraryStatus, setLibraryStatus, changeViewCallBack }) => {
+  // const { instance } = useMsal();
   return (
     <nav>
       <h1> React Hooks Music Player </h1>
@@ -31,12 +31,8 @@ const Nav = ({ libraryStatus, setLibraryStatus }) => {
           <FontAwesomeIcon icon={faMusic} />
         </button>
 
-        <button
-          onClick={() => {
-            instance.logoutRedirect();
-          }}
-        >
-          Log Out
+        <button onClick={changeViewCallBack}>
+          Toggle Report View
           <FontAwesomeIcon icon={faArrowCircleRight} />
         </button>
       </div>
