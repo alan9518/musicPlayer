@@ -81,20 +81,12 @@ function App() {
       microsoftTeams.getContext((context, error) => {
         if (error) setToken(JSON.stringify(error));
         else {
-          microsoftTeams.authentication
-            .getAuthToken()
-            .then((data) => {
-              console.log(
-                "🚀 ~ file: App.js:85 ~ microsoftTeams.authentication ~ data:",
-                data
-              );
-            })
-            .catch((error) => {
-              console.log(
-                "🚀 ~ file: App.js:88 ~ microsoftTeams.authentication ~ error:",
-                error
-              );
-            });
+          console.log(
+            "🚀 ~ file: App.js:85 ~ microsoftTeams.getContext ~ microsoftTeams.authentication.getAuthToken():",
+            microsoftTeams.authentication.getAuthToken()
+          );
+          // microsoftTeams.authentication.getAuthToken()
+
           setToken(JSON.stringify(context, null, 2));
         }
       });
