@@ -48,10 +48,6 @@ const PowerBiEmbed = () => {
       },
     },
   });
-  console.log(
-    "🚀 ~ file: PowerbiEmbed.jsx:52 ~ PowerBiEmbed ~ sampleReportConfig:",
-    sampleReportConfig
-  );
 
   // Map of event handlers to be applied to the embedding report
   const eventHandlersMap = new Map([

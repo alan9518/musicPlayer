@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* ==========================================================================
  ** Music Player Main Component
  ** 29/12/2020
@@ -86,6 +87,24 @@ function App() {
     }
   };
 
+  const loginMsal = () => {
+    try {
+      instance.loginPopup().then((loginResponse) => {
+        console.log(
+          "🚀 ~ file: App.js:92 ~ instance.loginPopup ~ loginResponse:",
+          loginResponse
+        );
+
+        console.log(
+          "🚀 ~ file: App.js:94 ~ instance.loginPopup ~ myMSALObj.getAccount():",
+          instance.account
+        );
+      });
+    } catch (error) {
+      console.log("🚀 ~ file: App.js:106 ~ loginMsal ~ error:", error);
+    }
+  };
+
   const changeViewCallBack = () => {
     setShowReport(!showReport);
   };
@@ -93,7 +112,7 @@ function App() {
   return (
     <>
       <h5>is in Teams {isInTeams.toString()}</h5>
-      <button onClick={() => instance.loginPopup()}> Get User context </button>
+      <button onClick={loginMsal}> Get User context </button>
       {/* <button onClick={login}> Get User context </button> */}
 
       {token !== "" && (
