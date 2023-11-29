@@ -7,7 +7,7 @@
 // --------------------------------------
 // Imports
 // --------------------------------------
-// import { useMsal } from "@azure/msal-react";
+import { useMsal } from "@azure/msal-react";
 
 // import * as microsoftTeams from "@microsoft/teams-js";
 import * as microsoftTeams from "@microsoft/teams-js";
@@ -49,10 +49,12 @@ function App() {
   // const isAuthenticated = useIsAuthenticated();
   // console.log("🚀 ~ file: App.js:29 ~ App ~ isAuthenticated:", isAuthenticated);
 
-  // const { login, result, error } = useMsalAuthentication(
-  //   InteractionType.Redirect
-  // );
-  // const { inProgress, accounts } = useMsal();
+  const { login, result, error } = useMsalAuthentication(
+    InteractionType.Redirect
+  );
+  const { inProgress, accounts } = useMsal();
+  console.log("🚀 ~ file: App.js:56 ~ App ~ inProgress:", inProgress);
+  console.log("🚀 ~ file: App.js:56 ~ App ~ accounts:", accounts);
 
   const isInTeams = checkInTeams();
 
@@ -64,6 +66,8 @@ function App() {
   const [libraryStatus, setLibraryStatus] = useState(false);
   const [token, setToken] = useState("");
 
+  console.log("🚀 ~ file: App.js:53 ~ App ~ error:", error);
+  console.log("🚀 ~ file: App.js:53 ~ App ~ result:", result);
   useEffect(() => {
     isInTeams && microsoftTeams.initialize();
     setSongs(data);
@@ -92,7 +96,8 @@ function App() {
   return (
     <>
       <h5>is in Teams {isInTeams.toString()}</h5>
-      <button onClick={loginInTeams}> Get User context </button>
+      {/* <button onClick={loginInTeams}> Get User context </button> */}
+      <button onClick={login}> Get User context </button>
 
       {token !== "" && (
         <div className="codeblock">
