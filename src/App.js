@@ -89,7 +89,7 @@ function App() {
 
   const loginMsal = () => {
     try {
-      instance.loginPopup().then((loginResponse) => {
+      instance.loginRedirect().then((loginResponse) => {
         console.log(
           "🚀 ~ file: App.js:92 ~ instance.loginPopup ~ loginResponse:",
           loginResponse
@@ -99,6 +99,7 @@ function App() {
           "🚀 ~ file: App.js:94 ~ instance.loginPopup ~ myMSALObj.getAccount():",
           instance.account
         );
+        setToken(JSON.stringify(instance, null, 2));
       });
     } catch (error) {
       console.log("🚀 ~ file: App.js:106 ~ loginMsal ~ error:", error);
