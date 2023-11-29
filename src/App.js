@@ -49,12 +49,11 @@ function App() {
   // const isAuthenticated = useIsAuthenticated();
   // console.log("🚀 ~ file: App.js:29 ~ App ~ isAuthenticated:", isAuthenticated);
 
-  const { login, result, error } = useMsalAuthentication(
-    InteractionType.Redirect
-  );
-  const { inProgress, accounts } = useMsal();
-  console.log("🚀 ~ file: App.js:56 ~ App ~ inProgress:", inProgress);
-  console.log("🚀 ~ file: App.js:56 ~ App ~ accounts:", accounts);
+  // const { login, result, error } = useMsalAuthentication(
+  //   InteractionType.Redirect
+  // );
+  // const { inProgress, accounts } = useMsal();
+  const { instance } = useMsal();
 
   const isInTeams = checkInTeams();
 
@@ -66,8 +65,10 @@ function App() {
   const [libraryStatus, setLibraryStatus] = useState(false);
   const [token, setToken] = useState("");
 
-  console.log("🚀 ~ file: App.js:53 ~ App ~ error:", error);
-  console.log("🚀 ~ file: App.js:53 ~ App ~ result:", result);
+  useEffect(() => {
+    instance.loginPopup();
+  }, []);
+
   useEffect(() => {
     isInTeams && microsoftTeams.initialize();
     setSongs(data);
@@ -97,7 +98,7 @@ function App() {
     <>
       <h5>is in Teams {isInTeams.toString()}</h5>
       {/* <button onClick={loginInTeams}> Get User context </button> */}
-      <button onClick={login}> Get User context </button>
+      {/* <button onClick={login}> Get User context </button> */}
 
       {token !== "" && (
         <div className="codeblock">
