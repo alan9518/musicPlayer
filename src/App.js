@@ -91,7 +91,7 @@ function App() {
     try {
       const silentRequest = {
         scopes: ["User.Read"],
-        // loginHint: "user@contoso.com"
+        loginHint: "alan.medina@derevo.com.mx",
       };
       instance.ssoSilent(silentRequest).then((loginResponse) => {
         console.log(
