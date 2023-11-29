@@ -80,7 +80,23 @@ function App() {
       // Get the user context from Teams and set it in the state
       microsoftTeams.getContext((context, error) => {
         if (error) setToken(JSON.stringify(error));
-        else setToken(JSON.stringify(context, null, 2));
+        else {
+          microsoftTeams
+            .authentication()
+            .then((data) => {
+              console.log(
+                "🚀 ~ file: App.js:85 ~ microsoftTeams.authentication ~ data:",
+                data
+              );
+            })
+            .catch((error) => {
+              console.log(
+                "🚀 ~ file: App.js:88 ~ microsoftTeams.authentication ~ error:",
+                error
+              );
+            });
+          setToken(JSON.stringify(context, null, 2));
+        }
       });
     } catch (error) {
       setToken("error");
