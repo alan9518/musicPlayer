@@ -81,8 +81,8 @@ function App() {
       microsoftTeams.getContext((context, error) => {
         if (error) setToken(JSON.stringify(error));
         else {
-          microsoftTeams
-            .authentication()
+          microsoftTeams.authentication
+            .getAuthToken()
             .then((data) => {
               console.log(
                 "🚀 ~ file: App.js:85 ~ microsoftTeams.authentication ~ data:",
