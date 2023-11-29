@@ -89,18 +89,22 @@ function App() {
 
   const loginMsal = () => {
     try {
-      instance.loginRedirect().then((loginResponse) => {
-        console.log(
-          "🚀 ~ file: App.js:92 ~ instance.loginPopup ~ loginResponse:",
-          loginResponse
-        );
+      instance
+        .loginPopup({
+          prompt: "none",
+        })
+        .then((loginResponse) => {
+          console.log(
+            "🚀 ~ file: App.js:92 ~ instance.loginPopup ~ loginResponse:",
+            loginResponse
+          );
 
-        console.log(
-          "🚀 ~ file: App.js:94 ~ instance.loginPopup ~ myMSALObj.getAccount():",
-          instance.account
-        );
-        setToken(JSON.stringify(instance, null, 2));
-      });
+          console.log(
+            "🚀 ~ file: App.js:94 ~ instance.loginPopup ~ myMSALObj.getAccount():",
+            instance.account
+          );
+          setToken(JSON.stringify(instance, null, 2));
+        });
     } catch (error) {
       console.log("🚀 ~ file: App.js:106 ~ loginMsal ~ error:", error);
     }
