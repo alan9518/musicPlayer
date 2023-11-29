@@ -66,10 +66,6 @@ function App() {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    instance.loginPopup();
-  }, []);
-
-  useEffect(() => {
     isInTeams && microsoftTeams.initialize();
     setSongs(data);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -97,7 +93,7 @@ function App() {
   return (
     <>
       <h5>is in Teams {isInTeams.toString()}</h5>
-      {/* <button onClick={loginInTeams}> Get User context </button> */}
+      <button onClick={() => instance.loginPopup()}> Get User context </button>
       {/* <button onClick={login}> Get User context </button> */}
 
       {token !== "" && (
