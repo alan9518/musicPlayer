@@ -146,7 +146,7 @@ function App() {
     <>
       <h5>is in Teams {isInTeams.toString()}</h5>
       {/* <button onClick={loginMsal}> Get User context </button> */}
-      <button onClick={login}> Get User context </button>
+      <button onClick={loginInTeams}> Get User context </button>
 
       {token !== "" && (
         <div className="codeblock">
