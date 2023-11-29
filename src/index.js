@@ -1,8 +1,4 @@
-import {
-  BrowserCacheLocation,
-  EventType,
-  PublicClientApplication,
-} from "@azure/msal-browser";
+import { EventType, PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
 import React from "react";
 
@@ -22,9 +18,9 @@ const msalInstance = new PublicClientApplication({
   // cache: {
   //   cacheLocation: "localStorage", // set your cache location to local storage
   // },
-  cache: {
-    cacheLocation: BrowserCacheLocation.LocalStorage, // Ensure cache is shared between windows/tabs
-  },
+  // cache: {
+  //   cacheLocation: BrowserCacheLocation.LocalStorage, // Ensure cache is shared between windows/tabs
+  // },
 });
 
 msalInstance.initialize().then(() => {
