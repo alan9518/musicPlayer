@@ -93,18 +93,46 @@ function App() {
         scopes: ["User.Read"],
         loginHint: "alan.medina@derevo.com.mx",
       };
-      instance.ssoSilent(silentRequest).then((loginResponse) => {
-        console.log(
-          "🚀 ~ file: App.js:92 ~ instance.loginPopup ~ loginResponse:",
-          loginResponse
-        );
+      instance
+        .ssoSilent(silentRequest)
+        .then((loginResponse) => {
+          console.log(
+            "🚀 ~ file: App.js:92 ~ instance.loginPopup ~ loginResponse:",
+            loginResponse
+          );
 
-        console.log(
-          "🚀 ~ file: App.js:94 ~ instance.loginPopup ~ myMSALObj.getAccount():",
-          instance.account
-        );
-        setToken(JSON.stringify(instance, null, 2));
-      });
+          console.log(
+            "🚀 ~ file: App.js:94 ~ instance.loginPopup ~ myMSALObj.getAccount():",
+            instance.account
+          );
+          setToken(JSON.stringify(instance, null, 2));
+        })
+        .catch((error) => {
+          console.log(
+            "🚀 ~ file: App.js:108 ~ instance.ssoSilent ~ error:",
+            error
+          );
+          instance
+            .loginPopup()
+            .then((loginResponse) => {
+              console.log(
+                "🚀 ~ file: App.js:92 ~ instance.loginPopup ~ loginResponse:",
+                loginResponse
+              );
+
+              console.log(
+                "🚀 ~ file: App.js:94 ~ instance.loginPopup ~ myMSALObj.getAccount():",
+                instance.account
+              );
+              setToken(JSON.stringify(instance, null, 2));
+            })
+            .catch((error) => {
+              console.log(
+                "🚀 ~ file: App.js:108 ~ instance.ssoSilent ~ error:",
+                error
+              );
+            });
+        });
     } catch (error) {
       console.log("🚀 ~ file: App.js:106 ~ loginMsal ~ error:", error);
     }
