@@ -77,15 +77,20 @@ function App() {
       // Initialize the Microsoft Teams SDK
       microsoftTeams.initialize();
 
+      let authTokenRequest = {
+        successCallback: function (result) {
+          console.log("Success: " + result);
+        },
+        failureCallback: function (error) {
+          console.log("Error getting token: " + error);
+        },
+      };
+
       // Get the user context from Teams and set it in the state
       microsoftTeams.getContext((context, error) => {
         if (error) setToken(JSON.stringify(error));
         else {
-          console.log(
-            "🚀 ~ file: App.js:85 ~ microsoftTeams.getContext ~ microsoftTeams.authentication.getAuthToken():",
-            microsoftTeams.authentication.getAuthToken()
-          );
-          // microsoftTeams.authentication.getAuthToken()
+          microsoftTeams.authentication.getAuthToken(authTokenRequest);
 
           setToken(JSON.stringify(context, null, 2));
         }
