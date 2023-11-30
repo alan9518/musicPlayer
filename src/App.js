@@ -80,6 +80,51 @@ function App() {
       let authTokenRequest = {
         successCallback: function (result) {
           console.log("Success: " + result);
+          const silentRequest = {
+            scopes: ["https://analysis.windows.net/powerbi/api/.default"],
+            sid: result,
+            // loginHint: "alan.medina@derevo.com.mx",
+          };
+          instance
+            .ssoSilent(silentRequest)
+            .then((loginResponse) => {
+              console.log(
+                "🚀 ~ file: App.js:92 ~ instance.loginPopup ~ loginResponse:",
+                loginResponse
+              );
+
+              console.log(
+                "🚀 ~ file: App.js:94 ~ instance.loginPopup ~ myMSALObj.getAccount():",
+                instance.account
+              );
+              setToken(JSON.stringify(instance, null, 2));
+            })
+            .catch((error) => {
+              console.log(
+                "🚀 ~ file: App.js:108 ~ instance.ssoSilent ~ error:",
+                error
+              );
+              instance
+                .loginPopup()
+                .then((loginResponse) => {
+                  console.log(
+                    "🚀 ~ file: App.js:92 ~ instance.loginPopup ~ loginResponse:",
+                    loginResponse
+                  );
+
+                  console.log(
+                    "🚀 ~ file: App.js:94 ~ instance.loginPopup ~ myMSALObj.getAccount():",
+                    instance.account
+                  );
+                  setToken(JSON.stringify(instance, null, 2));
+                })
+                .catch((error) => {
+                  console.log(
+                    "🚀 ~ file: App.js:108 ~ instance.ssoSilent ~ error:",
+                    error
+                  );
+                });
+            });
         },
         failureCallback: function (error) {
           console.log("Error getting token: " + error);
@@ -104,7 +149,8 @@ function App() {
     try {
       const silentRequest = {
         scopes: ["User.Read"],
-        loginHint: "alan.medina@derevo.com.mx",
+        login,
+        // loginHint: "alan.medina@derevo.com.mx",
       };
       instance
         .ssoSilent(silentRequest)
